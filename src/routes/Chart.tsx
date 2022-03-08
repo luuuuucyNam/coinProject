@@ -3,6 +3,8 @@ import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { fetchCoinHistory } from "../api";
 import ApexChart from "react-apexcharts";
+import { useRecoilValue } from "recoil";
+import { isDarkAtom } from "../atoms";
 
 interface IHistorical {
   close: number;
@@ -19,6 +21,7 @@ interface ChartProps {
   coinId: string;
 }
 function Chart({ coinId }: ChartProps) {
+  const isDark = useRecoilValue(isDarkAtom);
   const { isLoading, data } = useQuery<IHistorical[]>(
     ["ohlcv", coinId],
     () => fetchCoinHistory(coinId),
@@ -43,7 +46,7 @@ function Chart({ coinId }: ChartProps) {
           ]}
           options={{
             theme: {
-              mode: "dark",
+              mode: isDark ? "dark" : "light",
             },
             chart: {
               height: 300,
@@ -79,42 +82,42 @@ function Chart({ coinId }: ChartProps) {
             //   gradient: { gradientToColors: ["#6c5ce7"], stops: [0, 100] },
             // },
             // colors: ["#ffeaa7"],
-            tooltip: {
-              custom: function ({ seriesIndex, dataPointIndex, w }) {
-                const o =
-                  w.globals.seriesCandleO[seriesIndex][dataPointIndex].toFixed(
-                    2
-                  );
-                const h =
-                  w.globals.seriesCandleH[seriesIndex][dataPointIndex].toFixed(
-                    2
-                  );
-                const l =
-                  w.globals.seriesCandleL[seriesIndex][dataPointIndex].toFixed(
-                    2
-                  );
-                const c =
-                  w.globals.seriesCandleC[seriesIndex][dataPointIndex].toFixed(
-                    2
-                  );
-                return (
-                  '<div class="apexcharts-tooltip-candlestick">' +
-                  '<div>Open: <span class="value">' +
-                  o +
-                  "</span></div>" +
-                  '<div>High: <span class="value">' +
-                  h +
-                  "</span></div>" +
-                  '<div>Low: <span class="value">' +
-                  l +
-                  "</span></div>" +
-                  '<div>Close: <span class="value">' +
-                  c +
-                  "</span></div>" +
-                  "</div>"
-                );
-              },
-            },
+            // tooltip: {
+            //   custom: function ({ seriesIndex, dataPointIndex, w }) {
+            //     const o =
+            //       w.globals.seriesCandleO[seriesIndex][dataPointIndex].toFixed(
+            //         2
+            //       );
+            //     const h =
+            //       w.globals.seriesCandleH[seriesIndex][dataPointIndex].toFixed(
+            //         2
+            //       );
+            //     const l =
+            //       w.globals.seriesCandleL[seriesIndex][dataPointIndex].toFixed(
+            //         2
+            //       );
+            //     const c =
+            //       w.globals.seriesCandleC[seriesIndex][dataPointIndex].toFixed(
+            //         2
+            //       );
+            //     return (
+            //       '<div class="apexcharts-tooltip-candlestick">' +
+            //       '<div>Open: <span class="value">' +
+            //       o +
+            //       "</span></div>" +
+            //       '<div>High: <span class="value">' +
+            //       h +
+            //       "</span></div>" +
+            //       '<div>Low: <span class="value">' +
+            //       l +
+            //       "</span></div>" +
+            //       '<div>Close: <span class="value">' +
+            //       c +
+            //       "</span></div>" +
+            //       "</div>"
+            //     );
+            //   },
+            // },
           }}
         />
       )}

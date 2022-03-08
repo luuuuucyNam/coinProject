@@ -64,25 +64,25 @@ function Price({ tickersData }: PriceProps) {
         <OverviewItem>
           <span>1Hours</span>
         </OverviewItem>
-        <OverviewItem>{`${tickersData?.quotes.USD.percent_change_1h} %`}</OverviewItem>
+        <OverviewItem>{`${tickersData?.quotes?.USD.percent_change_1h} %`}</OverviewItem>
       </Overview>
       <Overview>
         <OverviewItem>
           <span>24Hours</span>
         </OverviewItem>
-        <OverviewItem>{`${tickersData?.quotes.USD.percent_change_24h} %`}</OverviewItem>
+        <OverviewItem>{`${tickersData?.quotes?.USD.percent_change_24h} %`}</OverviewItem>
       </Overview>
       <Overview>
         <OverviewItem>
           <span>7Days</span>
         </OverviewItem>
-        <OverviewItem>{`${tickersData?.quotes.USD.percent_change_7d} %`}</OverviewItem>
+        <OverviewItem>{`${tickersData?.quotes?.USD.percent_change_7d} %`}</OverviewItem>
       </Overview>
       <Overview>
         <OverviewItem>
           <span>30Days</span>
         </OverviewItem>
-        <OverviewItem>{`${tickersData?.quotes.USD.percent_change_30d} %`}</OverviewItem>
+        <OverviewItem>{`${tickersData?.quotes?.USD.percent_change_30d} %`}</OverviewItem>
       </Overview>
     </div>
   );
